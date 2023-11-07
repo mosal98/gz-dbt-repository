@@ -3,10 +3,48 @@ version: 2
 sources:
   - name: raw
     schema: gz_raw_data
+    description: greenwiz raw data source
     tables:
       - name: sales
         identifier: raw_gz_sales
+        description: sales of greenwez / we have one row per products_id found in each orders_id
+        columns:
+          - name: date_date
+            description: the date of purchase & primary key of the table
+          - name: orders_id
+            description: A unique identifier for each order
+          - name: pdt_id
+            description: The product identifier associated with each sale
+          - name: revenue
+            description: The revenue generated from each sale
+          - name: quantity
+            description: The quantity of products sold in each order
+        tests:
+          - unique:
+              column_name: "(orders_id || '-' || pdt_id)"
       - name: product
         identifier: raw_gz_product
+        description: includes information about product identifiers and purchase prices
+        columns:
+          - name: products_id
+            description: A unique identifier for each product
+            tests:
+              - unique
+              - not_null
+          - name: purchSE_PRICE
+            description: The purchase price associated with each product
       - name: ship
         identifier: raw_gz_ship
+        description: includes information about orders, shipping fees, and costs
+        columns:
+          - name: orders_id
+            description: A unique identifier for each order
+            tests:
+              - unique
+              - not_null
+          - name: shipping_fee
+            description: The primary shipping fee associated with each order
+          - name: logCost
+            description: Logistical cost related to shipping for each order
+          - name: ship_cost
+            description: The total shipping cost for each order
