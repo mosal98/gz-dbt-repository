@@ -21,6 +21,10 @@ select
   SUM(quantity) as quantity,
   SUM(purchase_cost) as purchase_cost,
   SUM(margin) as margin,
+  SUM(revenue) as revenue,
+  SUM(shipping_fee) as shipping_fee,
+  SUM(logcost) as logcost,
+  SUM(CAST(ship_cost as FLOAT64)) as ship_cost
 from join_tables
 GROUP BY
 orders_id,
