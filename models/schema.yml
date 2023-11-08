@@ -48,3 +48,4 @@ sources:
             description: Logistical cost related to shipping for each order
           - name: ship_cost
             description: The total shipping cost for each order
+
